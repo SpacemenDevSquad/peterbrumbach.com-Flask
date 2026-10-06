@@ -6,7 +6,7 @@
  */
 
 // Asset URLs are resolved relative to this file (/assets/js/)
-const starImageLocation = new URL("../images/stars/smallStar.png", import.meta.url).href;
+const starImageLocation = new URL("../images/stars/smallStar.webp", import.meta.url).href;
 
 async function smallStars(){
     // Constant Variables

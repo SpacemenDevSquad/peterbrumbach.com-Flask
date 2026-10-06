@@ -7,8 +7,8 @@
  */
 
 // Asset URLs are resolved relative to this file (/assets/js/)
-const volume0 = new URL("../images/volume/volume0.png", import.meta.url).href;
-const volume1 = new URL("../images/volume/volume1.png", import.meta.url).href;
+const volume0 = new URL("../images/volume/volume0.webp", import.meta.url).href;
+const volume1 = new URL("../images/volume/volume1.webp", import.meta.url).href;
 const blipSelect = new URL("../sfx/blipSelect.wav", import.meta.url).href;
 
 async function audioButtonMain(url) {
