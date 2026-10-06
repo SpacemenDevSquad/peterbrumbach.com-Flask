@@ -1,0 +1,19 @@
+/*
+* Homepage CSS
+* Layout, colors and spacing all come from Bootstrap classes in the template.
+* Only the things Bootstrap can't do live here.
+*/
+
+/* Blinking stars (created by js/blinkStar.js) */
+.star {
+    position: fixed;
+    visibility: hidden;
+    z-index: 0;
+    user-select: none;
+    transition-duration: 0.3s;
+}
+
+/* Keeps small pixel art crisp when it is scaled up */
+.pixel-art {
+    image-rendering: pixelated;
+}

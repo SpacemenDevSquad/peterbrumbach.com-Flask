@@ -1,0 +1,16 @@
+/**
+* Background Star CSS
+*/
+.smallStar {
+    padding: 0;
+    margin: 0;
+
+    position: fixed;
+    overflow: hidden;
+    user-select: none;
+
+    transform: translateX(0px);
+    transition-duration: 0.3s;
+
+    z-index: 0;
+}

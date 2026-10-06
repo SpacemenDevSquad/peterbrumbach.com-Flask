@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Peter Brumbach{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/smallStar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/audioButton.css') }}">
+{% endblock %}
+
+{# One box. Used by the "My projects" and "My lighting projects" sections. #}
+{% macro box(item) %}
+        <div class="col">
+          <div class="card h-100 bg-body-tertiary">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <img class="pixel-art object-fit-contain rounded flex-shrink-0" width="56" height="56" alt=""
+                     src="{{ url_for('static', filename=item.icon or 'images/stars/star4.png') }}">
+                <div>
+                  <h3 class="card-title h5 mb-1">{{ item.title }}</h3>
+                  <p class="card-subtitle small text-body-secondary mb-0">{{ item.meta }}</p>
+                </div>
+              </div>
+              <p class="card-text">{{ item.text }}</p>
+              {% if item.url %}
+              <a class="btn btn-sm btn-outline-warning align-self-start mt-auto" href="{{ item.url }}">View Project</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+{% endmacro %}
+
+{% block content %}
+    <button id="musicButton">
+      <img src="{{ url_for('static', filename='images/volume/volume1.png') }}" class="buttonimg" alt="Toggle music">
+    </button>
+
+    <div class="container">
+      <header class="card p-5 mt-5 col-8 bg-body-tertiary">
+        <h1 class="display-1">Peter Brumbach</h1>
+        <p class="lead col-lg-8">
+          Welcome to peterbrumbach.com! I will be posting some of my own personal
+          projects/games here for you to check out.
+        </p>
+        <nav class="d-flex flex-wrap gap-2 mt-4" aria-label="Page sections">
+          <a class="btn btn-outline-warning" href="#about">About me</a>
+          <a class="btn btn-outline-warning" href="#projects">Projects</a>
+          {# <a class="btn btn-outline-warning" href="#lighting">My lighting projects</a> #}
+        </nav>
+      </header>
+
+      <section id="about" class="py-5">
+        <h2 class="mb-4">About me</h2>
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="card h-100 bg-body-tertiary">
+              <div class="card-body">
+                <h3 class="card-title h5">Biography</h3>
+                <p class="card-text">
+                  Hello! My name is Peter Brumbach.
+                  I am a current Computer Science BS student at Grove City College.
+                  I enjoy theater, coding, reading, and hiking. My goal is to use the talents
+                  that God has given me to help others and to make creations for people
+                  to enjoy in the digital world.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="card h-100 bg-body-tertiary">
+              <div class="card-body">
+                <h3 class="card-title h5">Online Profiles</h3>
+              </div>
+              <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-transparent" href="https://www.linkedin.com/in/peterbrumbach/">LinkedIn</a>
+                <a class="list-group-item list-group-item-action bg-transparent" href="https://github.com/SpacemenDevSquad">GitHub</a>
+                <a class="list-group-item list-group-item-action bg-transparent" href="https://apps.apple.com/us/developer/peter-brumbach/id1697628835">Apple App Store</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="py-5">
+        <h2 class="mb-4">My Projects</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {% for item in projects %}{{ box(item) }}{% endfor %}
+        </div>
+      </section>
+
+      {# <section id="lighting" class="py-5">
+        <h2 class="mb-4">My lighting projects</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          {% for item in lighting_projects %}{{ box(item) }}{% endfor %}
+        </div>
+      </section> #}
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="module">
+      import audioButtonMain from "{{ url_for('static', filename='js/audioButton.js') }}";
+      import smallStars from "{{ url_for('static', filename='js/smallStar.js') }}";
+      import initalizeStars from "{{ url_for('static', filename='js/blinkStar.js') }}";
+
+      audioButtonMain("{{ url_for('static', filename='music/WebPage Home.mp3') }}");
+      smallStars();
+
+      // Skip the blinking stars for visitors who have asked for reduced motion
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        initalizeStars();
+      }
+    </script>
+{% endblock %}

@@ -1,0 +1,21 @@
+/* Volume Button */
+.buttonimg {
+    z-index: inherit;
+    height: inherit;
+    width: inherit;
+
+    left: inherit;
+}
+
+#musicButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    position: fixed;
+    align-items: center;
+    transition-duration: 0.2s;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+}

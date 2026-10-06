@@ -1,0 +1,30 @@
+/*
+* Fonts
+*
+* Only the fonts the homepage uses are here for now.
+* Add the rest back (Jersey, Christmas, Festive, Savate) as those pages get ported.
+*/
+
+@font-face {
+    font-family: Roboto Slab;
+    src: url('../fonts/roboto.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Pixelify Sans;
+    src: url('../fonts/pixel.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Body text: tell Bootstrap to use Roboto Slab */
+:root {
+    --bs-body-font-family: "Roboto Slab", serif;
+}
+
+/* Headings: pixel font */
+h1, h2, h3, .font-pixel {
+    font-family: "Pixelify Sans", sans-serif;
+}
