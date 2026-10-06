@@ -3,11 +3,11 @@
  */
 
 // Asset URLs are resolved relative to this file (/assets/js/)
-const star0 = new URL("../images/stars/star0.png", import.meta.url).href;
-const star1 = new URL("../images/stars/star1.png", import.meta.url).href;
-const star2 = new URL("../images/stars/star2.png", import.meta.url).href;
-const star3 = new URL("../images/stars/star3.png", import.meta.url).href;
-const star4 = new URL("../images/stars/star4.png", import.meta.url).href;
+const star0 = new URL("../images/stars/star0.webp", import.meta.url).href;
+const star1 = new URL("../images/stars/star1.webp", import.meta.url).href;
+const star2 = new URL("../images/stars/star2.webp", import.meta.url).href;
+const star3 = new URL("../images/stars/star3.webp", import.meta.url).href;
+const star4 = new URL("../images/stars/star4.webp", import.meta.url).href;
 
 // Create the default blinking star
 async function initalizeStars() {
