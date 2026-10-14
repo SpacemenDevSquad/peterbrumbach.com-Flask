@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="raytracing, raytracer, raymarching, javascript, coding, programming, project">
+    <meta name="description" content="A customizable javascript raymarching engine that runs in your web browser">
+    <meta name="author" content="Peter Brumbach & Jacob Huber">
+    <meta name="theme-color" content="#6FBBE8">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+    <meta property="og:title" content="Javascript Raymarching">
+    <meta property="og:description" content="A raymarching algorithim that runs in your web browser">
+    <meta property="og:image" content="./favicon.ico">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="JS Raytracer">
+    <link rel="apple-touch-icon" href="./favicon.ico">
+
+    <title>JS Raymarching</title>
+    <script src="https://peterbrumbach.com/raymarching/js/interval.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/vector3.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/ray.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/hittable.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/materials.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/hittableList.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/sphere.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/camera.js"></script>
+    <script src="https://peterbrumbach.com/raymarching/js/mainMethod.js"></script>
+    <link rel="stylesheet" href="https://peterbrumbach.com/CSS/Global/fonts.css">
+    <link rel="stylesheet" href="https://peterbrumbach.com/raymarching/css/rayMarch.css">
+</head>
+<body>
+    <h1>Javascript Raymarching</h1>
+    <h2>Generate 3D images in a web browser on your machine</h2>
+    <h2>By Jacob Huber, Henry Tan, Peter Brumbach</h2>
+    <div id="canvasDiv">
+        <canvas id="viewport" width="400" height="225"></canvas>
+    </div>
+    <div id="renderButton" onclick="startRender()">
+        <p>Render!</p>
+    </div>
+
+    <div name="spacer" style="height: 3vw;"></div>
+
+    <div id="descriptionBox">
+        <h3 id="timer">Welcome</h3>
+        <p>
+            This is a different way to render images, using ray marching instead of ray tracing. Again, you can use the settings below to modify the world for the camera to render. (Remember, open the console to watch the magic happen!)
+        </p>
+        <p>Code on Github: <a href="https://github.com/SpacemenDevSquad/raymarchingJS">JavaScript Raymarching</a></p>
+        <p>A Different Approach: <a href="/raytracing">Raytracing</a></p>
+    </div>
+
+    <div id="cameraSettings">
+        <p id="fovText" class="settingsText"></p>
+        <input id="fovSlider" class="slider" type="range" oninput="setFov()">
+        <p id="qualityText" class="settingsText"></p>
+        <input id="qualitySlider" class="slider" type="range" oninput="setQuality()">
+        <p id="positionText" class="settingsText">Camera Postion:</p>
+        <div class="textBoxRow">
+            <input type="text" class="camPosTextBox" id="camXPos" placeholder="X" oninput="setPosition()"><br>
+            <input type="text" class="camPosTextBox" id="camYPos" placeholder="Y" oninput="setPosition()"><br>
+            <input type="text" class="camPosTextBox" id="camZPos" placeholder="Z" oninput="setPosition()"><br>
+        </div>
+    </div>
+
+    <div class="textBoxRow">
+        <div class="createButton" onclick="AddSphere('lambertian')">
+            <p>Make Lambertain Sphere</p>
+        </div>
+    </div>
+
+    <div id="objectsGrid">
+        <div id="sphere1" class="object">
+            <p class="settingsText">World Position</p>
+            <div class="textBoxRow">
+                <input type="text" class="camPosTextBox" id="posX" placeholder="X" oninput="SetSphereLambertian('sphere1')" value="0" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="posY" placeholder="Y" oninput="SetSphereLambertian('sphere1')" value="0" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="posZ" placeholder="Z" oninput="SetSphereLambertian('sphere1')" value="-1.2" autocomplete="off"><br>
+            </div>
+            <p class="settingsText">Radius</p>
+            <div class="textBoxRow">
+                <input type="text" class="camPosTextBox" id="radius" placeholder="m" oninput="SetSphereLambertian('sphere1')" value="0.5" autocomplete="off"><br>
+            </div>
+            <p class="settingsText">Color</p>
+            <div class="textBoxRow">
+                <input type="text" class="camPosTextBox" id="colorR" placeholder="R" oninput="SetSphereLambertian('sphere1')" value="0.1" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="colorG" placeholder="G" oninput="SetSphereLambertian('sphere1')" value="0.2" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="colorB" placeholder="B" oninput="SetSphereLambertian('sphere1')" value="0.5" autocomplete="off"><br>
+            </div>
+            <div class="rmButton" onclick="RemoveSphere('sphere1')">
+                <p>Delete</p>
+            </div>
+            <div name="spacer" style="height: 3vw;"></div>
+        </div>
+    </div>
+
+    <div name="spacer" style="height: 30vw;"></div>
+</body>

@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Jersey;
+    src: url('/webApps/raytracer/fonts/jersey10.woff2') format('woff2'),
+         url('/webApps/raytracer/fonts/jersey10.woff') format('woff'),
+         url('/webApps/raytracer/fonts/jersey10.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

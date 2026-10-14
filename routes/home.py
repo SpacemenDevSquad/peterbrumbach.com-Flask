@@ -1,6 +1,3 @@
-"""
-Homepage
-"""
 import json
 from pathlib import Path
 from flask import Blueprint, current_app, render_template

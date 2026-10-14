@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="raytracing, raytracer, raymarching, javascript, coding, programming, project">
+    <meta name="description" content="A customizable javascript raytracing engine that runs in your web browser">
+    <meta name="author" content="Peter Brumbach">
+    <meta name="theme-color" content="#6FBBE8">
+    <link rel="icon" type="image/x-icon" href="/webApps/raytracer/favicon.ico">
+
+    <meta property="og:title" content="Javascript Raytracer">
+    <meta property="og:description" content="A raytracer that runs in your web browser">
+    <meta property="og:image" content="/webApps/raytracer/favicon.ico">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="JS Raytracer">
+    <link rel="apple-touch-icon" href="/webApps/raytracer/favicon.ico">
+
+    <title>JS Raytracer</title>
+    <script src="/webApps/raytracer/js/interval.js"></script>
+    <script src="/webApps/raytracer/js/vector3.js"></script>
+    <script src="/webApps/raytracer/js/ray.js"></script>
+    <script src="/webApps/raytracer/js/hittable.js"></script>
+    <script src="/webApps/raytracer/js/materials.js"></script>
+    <script src="/webApps/raytracer/js/hittableList.js"></script>
+    <script src="/webApps/raytracer/js/sphere.js"></script>
+    <script src="/webApps/raytracer/js/camera.js"></script>
+    <script src="/webApps/raytracer/js/mainMethod.js"></script>
+    <link rel="stylesheet" href="/webApps/raytracer/css/fonts.css">
+    <link rel="stylesheet" href="/webApps/raytracer/css/rayTrace.css">
+</head>
+<body>
+    <h1>Javascript Raytracer</h1>
+    <h2>Generate 3D images in a web browser on your machine</h2>
+    <h2>By Peter Brumbach, Henry Tan, Jacob Huber</h2>
+    <div id="canvasDiv">
+        <canvas id="viewport" width="400" height="225"></canvas>
+    </div>
+    <div id="renderButton" onclick="startRender()">
+        <p>Render!</p>
+    </div>
+
+    <div name="spacer" style="height: 3vw;"></div>
+
+    <div id="descriptionBox">
+        <h3 id="timer">Welcome</h3>
+        <p>
+            If it wasn't apparent, this is a simple raytracer that is able to run in javascript on your web browser. 
+            Below are a couple settings that can be adjusted to change the scene above, such as adding and removing spheres as well as changing your camera.
+            When you are ready, you can click the render button above to create your scene!
+            (If you want to watch the raytracer at work, open the browser console)
+        </p>
+        <p>Book that provided the basis for the algorithm (Huge Help): <a href="https://raytracing.github.io/books/RayTracingInOneWeekend.html">Ray Tracing in One Weekend</a></p>
+        <p>Code on Github: <a href="https://github.com/SpacemenDevSquad/Javascript-Raytracing">JavaScript Raytracer</a></p>
+        <p>A Different Approach: <a href="/raymarching">Raymarching</a></p>
+    </div>
+
+    <div id="cameraSettings">
+        <p id="fovText" class="settingsText"></p>
+        <input id="fovSlider" class="slider" type="range" oninput="setFov()">
+        <p id="qualityText" class="settingsText"></p>
+        <input id="qualitySlider" class="slider" type="range" oninput="setQuality()">
+        <p id="positionText" class="settingsText">Camera Postion:</p>
+        <div class="textBoxRow">
+            <input type="text" class="camPosTextBox" id="camXPos" placeholder="X" oninput="setPosition()"><br>
+            <input type="text" class="camPosTextBox" id="camYPos" placeholder="Y" oninput="setPosition()"><br>
+            <input type="text" class="camPosTextBox" id="camZPos" placeholder="Z" oninput="setPosition()"><br>
+        </div>
+    </div>
+
+    <div class="textBoxRow">
+        <div class="createButton" onclick="AddSphere('lambertian')">
+            <p>Make Lambertain Sphere</p>
+        </div>
+        <div class="createButton" onclick="AddSphere('metal')">
+            <p>Make Metallic Sphere</p>
+        </div>
+        <div class="createButton" onclick="AddSphere('glass')">
+            <p>Make Glass Sphere</p>
+        </div>
+    </div>
+
+    <div id="objectsGrid">
+        <div id="sphere1" class="object">
+            <p class="settingsText">World Position</p>
+            <div class="textBoxRow">
+                <input type="text" class="camPosTextBox" id="posX" placeholder="X" oninput="SetSphereLambertian('sphere1')" value="0" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="posY" placeholder="Y" oninput="SetSphereLambertian('sphere1')" value="0" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="posZ" placeholder="Z" oninput="SetSphereLambertian('sphere1')" value="-1.2" autocomplete="off"><br>
+            </div>
+            <p class="settingsText">Radius</p>
+            <div class="textBoxRow">
+                <input type="text" class="camPosTextBox" id="radius" placeholder="m" oninput="SetSphereLambertian('sphere1')" value="0.5" autocomplete="off"><br>
+            </div>
+            <p class="settingsText">Color</p>
+            <div class="textBoxRow">
+                <input type="text" class="camPosTextBox" id="colorR" placeholder="R" oninput="SetSphereLambertian('sphere1')" value="25.5" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="colorG" placeholder="G" oninput="SetSphereLambertian('sphere1')" value="51" autocomplete="off"><br>
+                <input type="text" class="camPosTextBox" id="colorB" placeholder="B" oninput="SetSphereLambertian('sphere1')" value="127.5" autocomplete="off"><br>
+            </div>
+            <div class="rmButton" onclick="RemoveSphere('sphere1')">
+                <p>Delete</p>
+            </div>
+            <div name="spacer" style="height: 3vw;"></div>
+        </div>
+    </div>
+
+    <div name="spacer" style="height: 30vw;"></div>
+</body>

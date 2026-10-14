@@ -9,7 +9,7 @@
 // Asset URLs are resolved relative to this file (/assets/js/)
 const volume0 = new URL("../images/volume/volume0.webp", import.meta.url).href;
 const volume1 = new URL("../images/volume/volume1.webp", import.meta.url).href;
-const blipSelect = new URL("../sfx/blipSelect.wav", import.meta.url).href;
+const blipSelectURL = new URL("../sfx/blipSelect.wav", import.meta.url).href;
 
 async function audioButtonMain(url) {
     // Inital Functions
@@ -98,7 +98,7 @@ async function playAudio() {
 
 async function audioButtonHover() {
     // Changes audio button when cursor hovers over
-    const hoverAudio = new Audio(blipSelect);
+    const hoverAudio = new Audio(blipSelectURL);
     hoverAudio.volume = 0.05;
     try {
         await hoverAudio.play(); 
