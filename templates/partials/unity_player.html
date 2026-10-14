@@ -1,0 +1,61 @@
+{#
+  Reusable Unity WebGL player.
+
+  Usage in any template:
+    {% from "partials/unity_player.html" import unity_player, unity_assets %}
+    {{ unity_assets() }}        <- once per page
+    {{ unity_player("projects/dondGame/unityFiles/Deal or No Deal WEB",
+                    product="Deal or No Deal", company="SpacemenDevSquad", version="1.1") }}
+
+  `build` is the path inside assets/ to the build files, minus the extensions
+  (.loader.js, .data.unityweb, .framework.js.unityweb, .wasm.unityweb).
+#}
+
+{% macro unity_assets() %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/unity-player.css') }}">
+<script src="{{ url_for('static', filename='js/unity-player.js') }}" defer></script>
+{% endmacro %}
+
+{% macro unity_player(build, product, company, version="1.0",
+                      width=1280, height=800, pixel_art=true,
+                      autoload=false, cover=none, id=none) %}
+{%- set build_dir = build.rpartition('/')[0] -%}
+{%- set cfg = {
+    "loaderUrl":          url_for('static', filename=build ~ '.loader.js'),
+    "dataUrl":            url_for('static', filename=build ~ '.data.unityweb'),
+    "frameworkUrl":       url_for('static', filename=build ~ '.framework.js.unityweb'),
+    "codeUrl":            url_for('static', filename=build ~ '.wasm.unityweb'),
+    "streamingAssetsUrl": url_for('static', filename=build_dir ~ '/StreamingAssets'),
+    "companyName":        company,
+    "productName":        product,
+    "productVersion":     version,
+} -%}
+<div class="unity-player position-relative rounded overflow-hidden bg-black shadow"
+     {% if id %}id="{{ id }}"{% endif %}
+     data-unity-player
+     data-unity-autoload="{{ 'true' if autoload else 'false' }}"
+     data-unity-config='{{ cfg|tojson }}'
+     style="--unity-aspect: {{ width / height }};">
+
+  <div class="ratio" style="--bs-aspect-ratio: {{ height / width * 100 }}%;">
+    <canvas tabindex="-1" {% if pixel_art %}data-pixel-art="true"{% endif %}></canvas>
+
+    {% if cover %}
+    <img data-unity-cover src="{{ cover }}" alt="" class="object-fit-cover">
+    {% endif %}
+
+    <div data-unity-overlay
+         class="d-flex flex-column align-items-center justify-content-center gap-3 bg-dark bg-opacity-50 text-light">
+      <button type="button" class="btn btn-warning btn-lg" data-unity-start>&#9654; Play {{ product }}</button>
+      <div class="progress w-50 d-none" role="progressbar" aria-label="Loading {{ product }}"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" style="width: 0%"></div>
+      </div>
+      <p class="small text-danger mb-0 d-none" data-unity-status></p>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-sm btn-dark bg-opacity-75 position-absolute bottom-0 end-0 m-2"
+          data-unity-fullscreen>Fullscreen</button>
+</div>
+{% endmacro %}
