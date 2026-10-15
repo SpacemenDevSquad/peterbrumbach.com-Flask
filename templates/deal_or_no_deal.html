@@ -1,20 +1,32 @@
 {% extends "base.html" %}
-{% from "partials/unity_player.html" import unity_player, unity_assets %}
-
-{% block title %}Deal or No Deal{% endblock %}
-
-{% block head %}
-  {{ super() }}
-  {{ unity_assets() }}
-{% endblock %}
+{% from "partials/unity_player.html" import unity_player %}
+{% from "partials/project_carousel.html" import project_carousel %}
+{% block title %}Deal or No Deal | Peter Brumbach{% endblock %}
 
 {% block content %}
-<div class="container py-4">
-  <h1 class="h3 mb-3">Deal or No Deal</h1>
-  {{ unity_player("assets/projects/dondGame/unityFiles/Deal or No Deal WEB",
-                  company="SpacemenDevSquad",
-                  product="Deal or No Deal",
-                  version="1.1",
-                  autoload=true) }}
+
+<div class="container py-5">
+  <div class="row g-4 align-items-start">
+
+    <div class="col-lg-4">
+      <h1 class="h3">Deal or No Deal</h1>
+      <ul class="list-unstyled small">
+        <li><span class="badge text-bg-secondary me-1">Engine</span>Unity</li>
+        <li><span class="badge text-bg-secondary me-1">Platform</span>Browser (WebGL)</li>
+        <li><span class="badge text-bg-secondary me-1">Version</span>1.1</li>
+      </ul>
+      <p>
+        Placeholder description. Click <strong>Play</strong> to download and start the game,
+        or <strong>Fullscreen</strong> to jump straight into a full-screen session.
+      </p>
+    </div>
+
+    <div class="col-lg-8">
+      {{ unity_player("projects/dondGame/unityFiles/Deal or No Deal WEB", product="Deal or No Deal", company="SpacemenDevSquad", version="1.1") }}
+    </div>
+
+  </div>
+
+  {{ project_carousel(projects) }}
 </div>
 {% endblock %}

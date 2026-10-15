@@ -3,7 +3,12 @@
 (function () {
   "use strict";
 
+  // The macro includes this script once per player; only run the first copy.
+  if (window.__unityPlayerLoaded) return;
+  window.__unityPlayerLoaded = true;
+
   const loadedScripts = {};
+  let playerCount = 0;
 
   function loadScript(src) {
     if (!loadedScripts[src]) {
@@ -19,8 +24,12 @@
   }
 
   function initPlayer(root) {
+    if (root.dataset.unityReady) return;
+    root.dataset.unityReady = "true";
     const cfg = JSON.parse(root.dataset.unityConfig);
     const canvas = root.querySelector("canvas");
+    // Unity finds its canvas with querySelector("#" + canvas.id), so it must have a unique id.
+    if (!canvas.id) canvas.id = "unity-canvas-" + (++playerCount);
     const overlay = root.querySelector("[data-unity-overlay]");
     const startBtn = root.querySelector("[data-unity-start]");
     const progress = root.querySelector(".progress");
@@ -44,11 +53,13 @@
       loadScript(cfg.loaderUrl)
         .then(function () { return createUnityInstance(canvas, cfg, setProgress); })
         .then(function () {
-          overlay.classList.add("d-none");
-          root.querySelectorAll("[data-unity-cover]").forEach(function (el) { el.classList.add("d-none"); });
+          // Not needed once the game is running, so take them out of the page entirely.
+          overlay.remove();
+          root.querySelectorAll("[data-unity-cover]").forEach(function (el) { el.remove(); });
           canvas.focus();
         })
         .catch(function (err) {
+          console.error("[unity-player]", err);
           progress.classList.add("d-none");
           status.textContent = "Couldn't load the game: " + err;
           status.classList.remove("d-none");
@@ -93,5 +104,19 @@
     if (root.dataset.unityAutoload === "true") start();
   }
 
-  document.querySelectorAll("[data-unity-player]").forEach(initPlayer);
+  function initAll() {
+    document.querySelectorAll("[data-unity-player]").forEach(function (root) {
+      try {
+        initPlayer(root);
+      } catch (err) {
+        console.error("[unity-player] couldn't set up player", root, err);
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAll);
+  } else {
+    initAll();
+  }
 })();

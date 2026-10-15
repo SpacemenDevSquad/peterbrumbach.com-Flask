@@ -19,6 +19,12 @@
   z-index: 1080;
 }
 
+/* <main> is z-1 like the footer, so lift it while the fallback is active,
+   otherwise the footer paints over the "fullscreen" game */
+main:has(.unity-pseudo-fullscreen) {
+  z-index: 1080 !important;
+}
+
 /* Letterbox: largest box with the game's aspect ratio that fits the screen */
 .unity-player:fullscreen > .ratio,
 .unity-player.unity-pseudo-fullscreen > .ratio {

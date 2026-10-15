@@ -1,0 +1,68 @@
+{#
+  "More projects" strip: scrolls continuously, and visitors can also drag,
+  swipe, trackpad-scroll, or use the arrow buttons.
+
+  Usage:
+    {% from "partials/project_carousel.html" import project_carousel %}
+    {{ project_carousel(projects) }}
+
+  `projects` is the list from assets/json/projects.json. Whichever project's
+  "url" matches the page being viewed is left out automatically.
+  The strip pulls in its own CSS/JS (project-marquee.css / .js).
+#}
+
+{% macro project_carousel(projects, heading="More projects", id="moreProjects", speed=40) %}
+{#- Compare URLs without slashes/case so "projects/DealOrNoDeal" matches /projects/DealOrNoDeal -#}
+{%- set here = request.path.strip('/').lower() -%}
+{%- set ns = namespace(items=[]) -%}
+{%- for p in projects if p.url and p.url.strip('/').lower() != here -%}
+  {%- set ns.items = ns.items + [p] -%}
+{%- endfor -%}
+
+{% if ns.items %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/project-marquee.css') }}">
+
+<section class="py-5" aria-labelledby="{{ id }}-heading">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h2 id="{{ id }}-heading" class="h4 mb-0">Check out more projects!</h2>
+    <div class="btn-group" role="group" aria-label="Scroll projects">
+      <button type="button" class="btn btn-outline-warning" data-marquee-prev aria-controls="{{ id }}">
+        <span aria-hidden="true">&larr;</span><span class="visually-hidden">Previous projects</span>
+      </button>
+      <button type="button" class="btn btn-outline-warning" data-marquee-next aria-controls="{{ id }}">
+        <span aria-hidden="true">&rarr;</span><span class="visually-hidden">More projects</span>
+      </button>
+    </div>
+  </div>
+
+  {# The JS duplicates the cards inside this track so the loop never runs out #}
+  <div id="{{ id }}" class="project-marquee overflow-x-auto" data-project-marquee data-speed="{{ speed }}"
+       tabindex="0" aria-label="{{ heading }}">
+    <div class="d-flex gap-3 py-2" data-marquee-track>
+      {% for p in ns.items %}
+      {#- Make every link site-absolute so "projects/X" doesn't become /projects/projects/X -#}
+      {%- set href = p.url if p.url.startswith(('/', 'http')) else '/' ~ p.url -%}
+      <div class="card bg-body-tertiary flex-shrink-0" style="width: 18rem;">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img class="pixel-art object-fit-contain rounded flex-shrink-0" width="56" height="56" alt=""
+                 draggable="false"
+                 src="{{ url_for('static', filename=p.icon or 'images/stars/star4.webp') }}">
+            <div>
+              <h3 class="card-title h6 mb-1">{{ p.title }}</h3>
+              <p class="card-subtitle small text-body-secondary mb-0">{{ p.meta }}</p>
+            </div>
+          </div>
+          <p class="card-text small">{{ p.text }}</p>
+          <a class="btn btn-sm btn-outline-warning align-self-start mt-auto stretched-link"
+             href="{{ href }}" draggable="false">View Project</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/project-marquee.js') }}" defer></script>
+{% endif %}
+{% endmacro %}
