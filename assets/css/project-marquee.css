@@ -1,0 +1,17 @@
+/* Project strip — only what Bootstrap can't do */
+
+/* Hide the scrollbar (the strip still scrolls by touch, trackpad, drag and arrows) */
+.project-marquee {
+  scrollbar-width: none;
+  /* Fade the cards out at both edges */
+  mask-image: linear-gradient(to right, transparent, #000 4rem, #000 calc(100% - 4rem), transparent);
+}
+.project-marquee::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mouse drag */
+.project-marquee.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}

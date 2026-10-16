@@ -1,0 +1,32 @@
+/* Unity WebGL player — only what Bootstrap can't do */
+
+.unity-player canvas[data-pixel-art="true"] {
+  image-rendering: pixelated;
+}
+
+/* Fullscreen (real Fullscreen API, or the fixed-position fallback for iPhone) */
+.unity-player:fullscreen,
+.unity-player.unity-pseudo-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.unity-player.unity-pseudo-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+}
+
+/* <main> is z-1 like the footer, so lift it while the fallback is active,
+   otherwise the footer paints over the "fullscreen" game */
+main:has(.unity-pseudo-fullscreen) {
+  z-index: 1080 !important;
+}
+
+/* Letterbox: largest box with the game's aspect ratio that fits the screen */
+.unity-player:fullscreen > .ratio,
+.unity-player.unity-pseudo-fullscreen > .ratio {
+  width: min(100vw, calc(100dvh * var(--unity-aspect)));
+}
