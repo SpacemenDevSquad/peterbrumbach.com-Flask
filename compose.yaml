@@ -5,8 +5,7 @@ services:
     container_name: peterbrumbach-site
     restart: unless-stopped
 
-    # Outside port is yours to pick in .env (default 8000); the app inside always uses 8000.
-    # Point Nginx Proxy Manager at  http://<this machine>:<PORT>
+    # Outside port is set in .env (default 8000); the app inside always uses 8000.
     ports:
       - "${BIND_ADDRESS:-0.0.0.0}:${PORT:-8000}:8000"
 
