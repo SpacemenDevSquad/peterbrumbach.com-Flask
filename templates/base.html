@@ -33,11 +33,11 @@
         <div class="d-flex flex-column flex-md-row justify-content-between gap-2 small">
           <span class="text-body-secondary">© {{ year }} Peter Brumbach</span>
           <ul class="list-unstyled d-flex flex-wrap column-gap-4 row-gap-2 mb-0">
-            <li><a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover" href="/">Home</a></li>
+            <li><a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover" href="{{url_for('home.index')}}">Home</a></li>
             <li>&middot;</li>
-            <li><a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover" href="/TOS">Terms and Conditions</a></li>
+            <li><a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover" href="{{url_for('docs.terms_of_service')}}">Terms and Conditions</a></li>
             <li>&middot;</li>
-            <li><a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover" href="/sitemap">Sitemap</a></li>
+            <li><a class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover" href="{{url_for('docs.terms_of_service')}}">Sitemap</a></li>
           </ul>
         </div>
       </div>
