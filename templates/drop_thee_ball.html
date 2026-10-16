@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "partials/unity_player.html" import unity_player %}
+{% from "partials/project_carousel.html" import project_carousel %}
+{% block title %}Drop Thee Ball{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="row g-4 align-items-start">
+
+    <div class="col-lg-4">
+      <h1 class="h3">Drop Thee Ball</h1>
+      <ul class="list-unstyled small">
+        <li><span class="badge text-bg-secondary me-1">Engine</span>Unity</li>
+        <li><span class="badge text-bg-secondary me-1">Updated</span>2025</li>
+        <li><span class="badge text-bg-secondary me-1">Version</span>1.0.1</li>
+      </ul>
+      <p>
+        A fangame based on the arcade version of the TV show 'Deal or No Deal.' Pick cases and try to get the greatest amount of tickets!
+      </p>
+      <iframe frameborder="0" src="https://itch.io/embed/2009767?bg_color=000000&amp;fg_color=ffffff&amp;link_color=ffee00&amp;border_color=333333" width="400"><a href="https://spacemendevsquad.itch.io/deal-or-no-deal">Deal or No Deal by Spacemen Dev Squad</a></iframe>
+    </div>
+
+    <div class="col-lg-8">
+      {{ unity_player("projects/dropTheeBall/unityFiles/Build 3", product="Drop Thee Ball", company="SpacemenDevSquad", version="1.0.1") }}
+    </div>
+
+  </div>
+
+  {{ project_carousel(projects) }}
+</div>
+{% endblock %}
