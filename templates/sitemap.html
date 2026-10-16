@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/yellowLink.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/smallStar.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    <script type="module">
+      import smallStars from "{{ url_for('static', filename='js/smallStar.js') }}";
+      smallStars();
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="p-5">
+    <h1>Sitemap</h1>
+    <ul>
+        <li><a class="yellowLink" href="{{url_for('home.index')}}">https://peterbrumbach.com{{url_for('home.index')}}</a></li>
+    </ul>
+    <h3>Projects</h3>
+    <ul>
+        <li><a class="yellowLink" href="{{url_for('projects.drop_thee_ball')}}">https://peterbrumbach.com{{url_for('projects.drop_thee_ball')}}</a></li>
+        <li><a class="yellowLink" href="{{url_for('projects.pointless_wars')}}">https://peterbrumbach.com{{url_for('projects.pointless_wars')}}</a></li>
+        <li><a class="yellowLink" href="{{url_for('projects.christmas_crash')}}">https://peterbrumbach.com{{url_for('projects.christmas_crash')}}</a></li>
+        <li><a class="yellowLink" href="{{url_for('projects.deal_or_no_deal')}}">https://peterbrumbach.com{{url_for('projects.deal_or_no_deal')}}</a></li>
+        <li><a class="yellowLink" href="{{url_for('projects.raytracer')}}">https://peterbrumbach.com{{url_for('projects.raytracer')}}</a></li>
+        <li><a class="yellowLink" href="{{url_for('projects.raymarching')}}">https://peterbrumbach.com{{url_for('projects.raymarching')}}</a></li>
+    </ul>
+    <h3>Documents</h3>
+    <ul>
+        <li><a class="yellowLink" href="{{url_for('docs.terms_of_service')}}">https://peterbrumbach.com{{url_for('docs.terms_of_service')}}</a></li>
+        <li><a class="yellowLink" href="{{url_for('docs.sitemap')}}">https://peterbrumbach.com{{url_for('docs.sitemap')}}</a></li>
+    </ul>
+</div>
+{% endblock %}

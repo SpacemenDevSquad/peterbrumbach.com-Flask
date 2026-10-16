@@ -1,0 +1,9 @@
+.yellowLink {
+    color: yellow;
+    transition-duration: 0.3s;
+}
+
+.yellowLink:hover {
+    color: red;
+    font-size: 1.1rem;
+}
