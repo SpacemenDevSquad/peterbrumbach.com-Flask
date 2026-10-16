@@ -1,0 +1,10 @@
+# robots.txt for peterbrumbach.com
+# Everything on the site may be crawled and indexed.
+
+User-agent: *
+Allow: /
+
+# Unity WebGL builds are large binary downloads with nothing to index
+Disallow: /*.unityweb$
+Disallow: /assets/projects/*/unityFiles/
+Disallow: /assets/projects/*/Build/
