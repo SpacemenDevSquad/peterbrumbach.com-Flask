@@ -4,36 +4,36 @@
       "title": "Javascript Raytracer",
       "meta": "JavaScript, 2025",
       "text": "A raytracer written in Javascript that renders right in the browser.",
-      "url": "/raytracer",
+      "url": "/projects/Raytracer",
       "icon": null
     },
     {
       "title": "Drop Thee Ball",
       "meta": "Unity, 2025",
       "text": "A simple gravity puzzle game, created in collaboration with John Bauer. Roll the ball to the goal while trying to keep its momentum!",
-      "url": "/drop-thee-ball",
-      "icon": "images/DTB/DropBall Icon.webp"
+      "url": "/projects/DropTheeBall",
+      "icon": "images/icons/DropBall Icon.webp"
     },
     {
       "title": "Pointless Wars",
       "meta": "Unity, 2023",
       "text": "A game about wars... that are pointless. Made for the Technology Student Association video game design competition, where it won 3rd in states.",
-      "url": "/pointless-wars",
-      "icon": "images/PW/PWIcon.webp"
+      "url": "/projects/PointlessWars",
+      "icon": "images/icons/PWIcon.webp"
     },
     {
       "title": "Deal or No Deal",
       "meta": "Unity fangame, 2023",
       "text": "A fan-made version of the classic arcade game. Choose a case and try to get as many tickets as you can!",
       "url": "/projects/DealOrNoDeal",
-      "icon": "images/DOND/DDIcon.webp"
+      "icon": "images/icons/DDIcon.webp"
     },
     {
       "title": "Christmas Crash",
       "meta": "SwiftUI, 2022",
       "text": "The first app I ever made, later remastered and published on the App Store.",
-      "url": "/christmascrash",
-      "icon": "images/ChristmasCrash/Christmas Crash Icon.webp"
+      "url": "/projects/ChristmasCrash",
+      "icon": "images/icons/Christmas Crash Icon.webp"
     }
   ]
 }

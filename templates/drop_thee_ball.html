@@ -2,6 +2,7 @@
 {% from "partials/unity_player.html" import unity_player %}
 {% from "partials/project_carousel.html" import project_carousel %}
 {% block title %}Drop Thee Ball{% endblock %}
+{% block favicon %}{{ url_for('static', filename='images/icons/DropBall Icon.webp') }}{% endblock %}
 
 {% block content %}
 
@@ -16,13 +17,24 @@
         <li><span class="badge text-bg-secondary me-1">Version</span>1.0.1</li>
       </ul>
       <p>
-        A fangame based on the arcade version of the TV show 'Deal or No Deal.' Pick cases and try to get the greatest amount of tickets!
+        Guide a ball through a maze of platforms and trampolines to reach the goal. 
+        With each move, you'll need to switch worlds at the right moment to create a 
+        safe path forward. Timing, precision, and quick thinking are the keys to dropping 
+        the ball into the goal!
       </p>
-      <iframe frameborder="0" src="https://itch.io/embed/2009767?bg_color=000000&amp;fg_color=ffffff&amp;link_color=ffee00&amp;border_color=333333" width="400"><a href="https://spacemendevsquad.itch.io/deal-or-no-deal">Deal or No Deal by Spacemen Dev Squad</a></iframe>
+      <p>
+        Created by John Bauer and Peter Brumbach for 2D Game Design at Grove City College
+      </p>
+      <iframe frameborder="0" src="https://itch.io/embed/3930682?border_width=2&amp;bg_color=6f5731&amp;fg_color=ffffff&amp;link_color=788d01&amp;border_color=8f703e" width="400"><a href="https://spacemendevsquad.itch.io/drop-thee-ball">Drop Thee Ball by Spacemen Dev Squad</a></iframe>
     </div>
 
     <div class="col-lg-8">
-      {{ unity_player("projects/dropTheeBall/unityFiles/Build 3", product="Drop Thee Ball", company="SpacemenDevSquad", version="1.0.1") }}
+      {{ unity_player("projects/dropTheeBall/unityFiles/Build 3",
+                product="Drop Thee Ball", company="SpacemenDevSquad", version="1.0.1",
+                button_color="#6f5731",
+                button_text_color="white",
+                bar_colors=["#6f5731", "#788d01"],
+                bar_track_color="#222") }}
     </div>
 
   </div>
