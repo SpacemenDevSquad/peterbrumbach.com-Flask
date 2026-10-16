@@ -7,29 +7,29 @@
     <meta name="description" content="A customizable javascript raytracing engine that runs in your web browser">
     <meta name="author" content="Peter Brumbach">
     <meta name="theme-color" content="#6FBBE8">
-    <link rel="icon" type="image/x-icon" href="/webApps/raytracer/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='projects/raytracer/favicon.ico') }}">
 
     <meta property="og:title" content="Javascript Raytracer">
     <meta property="og:description" content="A raytracer that runs in your web browser">
-    <meta property="og:image" content="/webApps/raytracer/favicon.ico">
+    <meta property="og:image" content="{{ url_for('static', filename='/projects/raytracer/favicon.ico') }}">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="JS Raytracer">
-    <link rel="apple-touch-icon" href="/webApps/raytracer/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='projects/raytracer/css/fonts.css') }}">
 
     <title>JS Raytracer</title>
-    <script src="/webApps/raytracer/js/interval.js"></script>
-    <script src="/webApps/raytracer/js/vector3.js"></script>
-    <script src="/webApps/raytracer/js/ray.js"></script>
-    <script src="/webApps/raytracer/js/hittable.js"></script>
-    <script src="/webApps/raytracer/js/materials.js"></script>
-    <script src="/webApps/raytracer/js/hittableList.js"></script>
-    <script src="/webApps/raytracer/js/sphere.js"></script>
-    <script src="/webApps/raytracer/js/camera.js"></script>
-    <script src="/webApps/raytracer/js/mainMethod.js"></script>
-    <link rel="stylesheet" href="/webApps/raytracer/css/fonts.css">
-    <link rel="stylesheet" href="/webApps/raytracer/css/rayTrace.css">
+    <script src="{{ url_for('static', filename='projects/raytracer/js/interval.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/vector3.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/ray.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/hittable.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects//raytracer/js/materials.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/hittableList.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/sphere.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/camera.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raytracer/js/mainMethod.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='projects/raytracer/css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='projects/raytracer/css/rayTrace.css') }}">
 </head>
 <body>
     <h1>Javascript Raytracer</h1>
