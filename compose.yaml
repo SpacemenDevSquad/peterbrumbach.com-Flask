@@ -1,0 +1,23 @@
+services:
+  web:
+    build: .
+    image: peterbrumbach-site:latest
+    container_name: peterbrumbach-site
+    restart: unless-stopped
+
+    # Outside port is set in .env (default 8000); the app inside always uses 8000.
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${PORT:-8000}:8000"
+
+    environment:
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-2}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+
+    # Hardening: the site never writes to disk, so the container's filesystem is read-only
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
