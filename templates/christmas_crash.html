@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% from "partials/project_carousel.html" import project_carousel %}
+
+{% block title %}Christmas Crash | Peter Brumbach{% endblock %}
+{% block favicon %}{{ url_for('static', filename='images/icons/Christmas Crash Icon.webp') }}{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/christmasCrash.css') }}">
+{% endblock %}
+
+{% block scripts %}
+  <script type="module">
+    import snow from "{{ url_for('static', filename='js/snow.js') }}";
+    snow("{{ url_for('static', filename='images/ChristmasCrash/Snow.webp') }}");
+  </script>
+{% endblock %}
+
+{% block content %}
+{# Background scenery: decorative only #}
+<img class="cc-hills position-fixed z-n1 pe-none user-select-none" alt="" aria-hidden="true"
+     src="{{ url_for('static', filename='images/ChristmasCrash/BackHills.webp') }}">
+
+<div class="container py-5">
+  <article aria-labelledby="cc-title">
+
+    <header class="text-center mb-5">
+      <img class="img-fluid rounded-5 shadow-lg user-select-none" width="320" height="320"
+           alt="Christmas Crash app icon: a decorated Christmas tree on a snowy hill"
+           src="{{ url_for('static', filename='images/icons/Christmas Crash Icon.webp') }}">
+      <h1 id="cc-title" class="font-christmas display-3 text-white mt-4 mb-2">Christmas Crash</h1>
+      <p class="text-white-50 mb-0">SwiftUI &middot; iOS 15+ &middot; 2022</p>
+    </header>
+
+    <div class="row g-4 align-items-center justify-content-center">
+
+      <div class="col-7 col-sm-5 col-md-4 col-lg-3">
+        <figure class="mb-0">
+          <div class="ratio rounded-4 overflow-hidden shadow-lg" style="--bs-aspect-ratio: 177.78%;">
+            <video autoplay muted playsinline controls preload="metadata"
+                   poster="{{ url_for('static', filename='images/ChristmasCrash/trailer-poster.webp') }}">
+              <source src="{{ url_for('static', filename='videos/christmas-crasher.webm') }}" type="video/webm">
+              <source src="{{ url_for('static', filename='videos/christmas-crasher.mp4') }}" type="video/mp4">
+            </video>
+          </div>
+          <figcaption class="small text-white-50 text-center mt-2">App Store launch trailer</figcaption>
+        </figure>
+      </div>
+
+      <div class="col-md-8 col-lg-7">
+        <section class="card cc-card border-0 rounded-4 shadow-lg" aria-labelledby="cc-about">
+          <div class="card-body p-4 p-lg-5">
+            <h2 id="cc-about" class="font-christmas h3 mb-3">About the app</h2>
+            <p>
+              This was the first app that I ever made, during my junior year in high school.
+              Using the old Xcode storyboards and later moving to SwiftUI, making this app
+              taught me the fundamentals of how to arrange UI elements across varying screen
+              widths and heights.
+            </p>
+            <p>
+              Recently, I remastered it and published it on the App Store! It is now available
+              to download for iOS 15 and later.
+            </p>
+            <a class="btn btn-light btn-lg mt-2" href="https://apps.apple.com/us/app/christmas-crasher/id6469570877"
+               target="_blank" rel="noopener">
+              View on the App Store
+            </a>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </article>
+
+  {{ project_carousel(projects) }}
+</div>
+{% endblock %}
