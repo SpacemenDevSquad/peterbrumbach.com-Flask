@@ -1,0 +1,8 @@
+# Security contact for peterbrumbach.com (RFC 9116, https://securitytxt.org)
+# If you have found a security issue on this site, please report it privately
+# to the contact below before disclosing it publicly. Thank you!
+
+Contact: mailto:contact@peterbrumbach.com
+Expires: 2027-10-14T23:59:00-04:00
+Preferred-Languages: en
+Canonical: https://peterbrumbach.com/.well-known/security.txt
