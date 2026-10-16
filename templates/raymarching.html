@@ -7,29 +7,30 @@
     <meta name="description" content="A customizable javascript raymarching engine that runs in your web browser">
     <meta name="author" content="Peter Brumbach & Jacob Huber">
     <meta name="theme-color" content="#6FBBE8">
-    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='projects/raymarching/favicon.ico') }}">
 
     <meta property="og:title" content="Javascript Raymarching">
     <meta property="og:description" content="A raymarching algorithim that runs in your web browser">
-    <meta property="og:image" content="./favicon.ico">
+    <meta property="og:image" content="{{ url_for('static', filename='projects/raymarching/favicon.ico') }}">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="JS Raytracer">
-    <link rel="apple-touch-icon" href="./favicon.ico">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='projects/raymarching/favicon.ico') }}">
 
     <title>JS Raymarching</title>
-    <script src="https://peterbrumbach.com/raymarching/js/interval.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/vector3.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/ray.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/hittable.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/materials.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/hittableList.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/sphere.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/camera.js"></script>
-    <script src="https://peterbrumbach.com/raymarching/js/mainMethod.js"></script>
-    <link rel="stylesheet" href="https://peterbrumbach.com/CSS/Global/fonts.css">
-    <link rel="stylesheet" href="https://peterbrumbach.com/raymarching/css/rayMarch.css">
+    <script src="{{ url_for('static', filename='projects/raymarching/js/interval.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/vector3.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/ray.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/hittable.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/materials.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/hittableList.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/sphere.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/camera.js') }}"></script>
+    <script src="{{ url_for('static', filename='projects/raymarching/js/mainMethod.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='projects/raytracer/css/fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='projects/raymarching/css/rayMarch.css') }}">
 </head>
 <body>
     <h1>Javascript Raymarching</h1>
