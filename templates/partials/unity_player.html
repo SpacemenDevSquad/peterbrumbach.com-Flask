@@ -8,6 +8,21 @@
 
   `build` is the path inside assets/ to the build files, minus the extensions
   (.loader.js, .data.unityweb, .framework.js.unityweb, .wasm.unityweb).
+
+  Optional colors (any CSS color: "#e63946", "rgb(0 200 120)", "gold", ...).
+  Leave one out to keep its default (yellow button, yellow-to-orange bar).
+    button_color       Play button background. Hover/pressed shades are derived from it.
+    button_text_color  Play button text.
+    bar_colors         Loading bar: a list for a left-to-right gradient,
+                       e.g. ["#00c6ff", "#7b2ff7", "#ff2e93"], or one color for a solid bar.
+    bar_track_color    The empty part of the loading bar.
+    bar_striped        Animated stripes over the bar (default true).
+
+  Example:
+    {{ unity_player("projects/dondGame/unityFiles/Deal or No Deal WEB",
+                    product="Deal or No Deal", company="SpacemenDevSquad", version="1.1",
+                    button_color="#e63946", button_text_color="white",
+                    bar_colors=["#e63946", "#ffb703", "#06d6a0"]) }}
 #}
 
 {# Kept for older templates that still call it; safe to call more than once. #}
@@ -18,8 +33,20 @@
 
 {% macro unity_player(build, product, company, version="1.0",
                       width=1280, height=800, pixel_art=true,
-                      autoload=false, cover=none, id=none) %}
+                      autoload=false, cover=none, id=none,
+                      button_color=none, button_text_color=none,
+                      bar_colors=none, bar_track_color=none, bar_striped=true) %}
 {%- set build_dir = build.rpartition('/')[0] -%}
+{#- Colors become CSS variables on the player; unity-player.css supplies the defaults -#}
+{%- set theme = [] -%}
+{%- if button_color %}{% set theme = theme + ['--unity-btn-bg: ' ~ button_color] %}{% endif -%}
+{%- if button_text_color %}{% set theme = theme + ['--unity-btn-color: ' ~ button_text_color] %}{% endif -%}
+{%- if bar_track_color %}{% set theme = theme + ['--unity-bar-track: ' ~ bar_track_color] %}{% endif -%}
+{%- if bar_colors -%}
+  {%- set stops = [bar_colors] if bar_colors is string else bar_colors | list -%}
+  {%- if stops | length == 1 %}{% set stops = [stops[0], stops[0]] %}{% endif -%}
+  {%- set theme = theme + ['--unity-bar: linear-gradient(to right, ' ~ stops | join(', ') ~ ')'] -%}
+{%- endif -%}
 {%- set cfg = {
     "loaderUrl":          url_for('static', filename=build ~ '.loader.js'),
     "dataUrl":            url_for('static', filename=build ~ '.data.unityweb'),
@@ -35,7 +62,7 @@
      data-unity-player
      data-unity-autoload="{{ 'true' if autoload else 'false' }}"
      data-unity-config='{{ cfg|tojson }}'
-     style="--unity-aspect: {{ width / height }};">
+     style="--unity-aspect: {{ width / height }};{% for rule in theme %} {{ rule }};{% endfor %}">
 
   <div class="ratio" style="--bs-aspect-ratio: {{ height / width * 100 }}%;">
     <canvas tabindex="-1" {% if pixel_art %}data-pixel-art="true"{% endif %}></canvas>
@@ -46,10 +73,10 @@
 
     <div data-unity-overlay
          class="d-flex flex-column align-items-center justify-content-center gap-3 bg-dark bg-opacity-50 text-light">
-      <button type="button" class="btn btn-warning btn-lg" data-unity-start>&#9654; Play {{ product }}</button>
-      <div class="progress w-50 d-none" role="progressbar" aria-label="Loading {{ product }}"
+      <button type="button" class="btn btn-lg unity-play-btn" data-unity-start>&#9654; Play {{ product }}</button>
+      <div class="progress unity-progress w-50 d-none" role="progressbar" aria-label="Loading {{ product }}"
            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" style="width: 0%"></div>
+        <div class="progress-bar {% if bar_striped %}progress-bar-striped progress-bar-animated{% endif %}" style="width: 0%"></div>
       </div>
       <p class="small text-danger mb-0 d-none" data-unity-status></p>
     </div>
