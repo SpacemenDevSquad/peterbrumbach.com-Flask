@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% from "partials/unity_player.html" import unity_player %}
 {% from "partials/project_carousel.html" import project_carousel %}
-{% block title %}Deal or No Deal | Peter Brumbach{% endblock %}
+{% block title %}Deal or No Deal{% endblock %}
+{% block favicon %}{{ url_for('static', filename='images/icons/DDIcon.webp') }}{% endblock %}
 
 {% block content %}
 
@@ -22,7 +23,12 @@
     </div>
 
     <div class="col-lg-8">
-      {{ unity_player("projects/dondGame/unityFiles/Deal or No Deal WEB", product="Deal or No Deal", company="SpacemenDevSquad", version="1.1") }}
+      {{ unity_player("projects/dondGame/unityFiles/Deal or No Deal WEB",
+                product="Deal or No Deal", company="SpacemenDevSquad", version="1.1",
+                button_color="#ffee00",
+                button_text_color="black",
+                bar_colors=["#ffee00"],
+                bar_track_color="#222") }}
     </div>
 
   </div>

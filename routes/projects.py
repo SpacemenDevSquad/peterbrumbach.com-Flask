@@ -7,3 +7,8 @@ projects_bp = Blueprint("projects", __name__, url_prefix="/projects")
 def deal_or_no_deal():
     projects = load_json("projects.json")["projects"]
     return render_template("deal_or_no_deal.html", projects=projects)
+
+@projects_bp.route("/DropTheeBall")
+def drop_thee_ball():
+    projects = load_json("projects.json")["projects"]
+    return render_template("drop_thee_ball.html", projects=projects)
