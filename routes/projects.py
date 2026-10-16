@@ -21,3 +21,7 @@ def pointless_wars():
 @projects_bp.route("/Raytracer")
 def raytracer():
     return render_template("raytracer.html")
+
+@projects_bp.route("/Raymarching")
+def raymarching():
+    return render_template("raymarching.html")
