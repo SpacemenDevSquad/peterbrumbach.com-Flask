@@ -1,0 +1,21 @@
+# Keep the image small and free of local clutter
+.git
+.gitignore
+.gitattributes
+.env
+.env.*
+!.env.example
+.venv
+venv
+__pycache__
+**/__pycache__
+*.pyc
+.DS_Store
+**/.DS_Store
+.vscode
+.idea
+*.zip
+Dockerfile
+compose.yaml
+docker-compose.yml
+.dockerignore

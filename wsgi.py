@@ -1,10 +1,11 @@
 """
 peterbrumbach.com - Flask entry point
 Development:  python wsgi.py
-Production:   gunicorn wsgi:app   (behind a Cloudflare Tunnel)
+Production:   docker compose up -d   (gunicorn, behind Cloudflare Tunnel -> Nginx Proxy Manager)
 """
 
 import json
+import os
 import random
 from datetime import date
 from pathlib import Path
@@ -16,7 +17,11 @@ from routes import register_routes
 
 BASE_DIR = Path(__file__).resolve().parent
 
-TRUSTED_HOSTS = ["peterbrumbach.com", "www.peterbrumbach.com", "peterbrumbach.dev", "www.peterbrumbach.dev"]
+# Requests for any other domain are rejected with "400 Bad Request" (needs Flask 3.1+)
+TRUSTED_HOSTS = ["peterbrumbach.com", "www.peterbrumbach.com"]
+
+# Number of proxies in front of the app (set in .env). Default: Cloudflare Tunnel -> Nginx Proxy Manager.
+PROXY_HOPS = int(os.environ.get("PROXY_HOPS", "2"))
 
 
 def create_app():
@@ -28,12 +33,14 @@ def create_app():
     )
     app.config["TRUSTED_HOSTS"] = list(TRUSTED_HOSTS)
 
-    # Cloudflare Tunnel is the one proxy in front of this app. Trust what it tells us about:
-    #   x_for:   the visitor's real IP (Cloudflare appends it to X-Forwarded-For)
-    #   x_proto: http vs https (Cloudflare overwrites X-Forwarded-Proto), so links say https://
-    # The Host header is passed through as the visitor's domain, so X-Forwarded-Host is NOT
-    # trusted; Cloudflare doesn't control it, and a visitor could set it to anything.
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=0, x_port=0, x_prefix=0)
+    # Trust what the proxies in front of the app tell us about:
+    #   x_for:   the visitor's real IP. Each proxy appends to X-Forwarded-For (Cloudflare adds
+    #            the visitor, Nginx Proxy Manager adds the tunnel), so skip back PROXY_HOPS entries.
+    #   x_proto: http vs https. Cloudflare sets X-Forwarded-Proto and Nginx Proxy Manager keeps it
+    #            as a single value, so links say https://
+    # Both proxies pass the visitor's domain in the normal Host header, so X-Forwarded-Host is NOT
+    # trusted; a visitor could set it to anything.
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=PROXY_HOPS, x_proto=1, x_host=0, x_port=0, x_prefix=0)
 
     verses_file = BASE_DIR / "assets" / "json" / "verses.json"
     verses = json.loads(verses_file.read_text(encoding="utf-8"))["verses"]
@@ -49,5 +56,7 @@ def create_app():
 app = create_app()
 
 if __name__ == "__main__":
+    # Local development only: also accept http://localhost:5000 and http://127.0.0.1:5000.
+    # Production (gunicorn wsgi:app) never runs this block, so it only trusts TRUSTED_HOSTS.
     app.config["TRUSTED_HOSTS"] += ["localhost", "127.0.0.1"]
     app.run(debug=True)
