@@ -12,3 +12,8 @@ def deal_or_no_deal():
 def drop_thee_ball():
     projects = load_json("projects.json")["projects"]
     return render_template("drop_thee_ball.html", projects=projects)
+
+@projects_bp.route("/PointlessWars")
+def pointless_wars():
+    projects = load_json("projects.json")["projects"]
+    return render_template("pointless_wars.html", projects=projects)

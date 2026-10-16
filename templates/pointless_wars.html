@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "partials/unity_player.html" import unity_player %}
+{% from "partials/project_carousel.html" import project_carousel %}
+{% block title %}Pointless Wars{% endblock %}
+{% block favicon %}{{ url_for('static', filename='images/icons/PWIcon.webp') }}{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+  <div class="row g-4 align-items-start">
+
+    <div class="col-lg-4">
+      <h1 class="h3">Pointless Wars</h1>
+      <ul class="list-unstyled small">
+        <li><span class="badge text-bg-secondary me-1">Engine</span>Unity</li>
+        <li><span class="badge text-bg-secondary me-1">Updated</span>2023</li>
+        <li><span class="badge text-bg-secondary me-1">Version</span>2.3</li>
+      </ul>
+      <p>
+        Welcome to Pointless Wars, the single-player and multiplayer game that takes strategy and skill to 
+        defeat your opponent in a pointless war! In this game, players compete to destroy their opponent's 
+        castle by buying units to attack, upgrading their castle to earn more gold, and even summoning meteors 
+        to defend. Pointless Wars has something for everyone with multiple modes to select from such as 
+        single-player against the computer, two-player for a quick friendly match, or even make your tournament 
+        with three up to eight players. Use your brain against your opponent in this puzzler of a party game. 
+      </p>
+      <iframe frameborder="0" src="https://itch.io/embed/1892975?border_width=2&amp;bg_color=3E86A1&amp;fg_color=ffffff&amp;link_color=583907&amp;border_color=1c4757" width="400"><a href="https://spacemendevsquad.itch.io/pointless-wars">Pointless Wars by Spacemen Dev Squad</a></iframe>
+    </div>
+
+    <div class="col-lg-8">
+      {{ unity_player("projects/pwGame/unityFiles/Pointless Wars 2.3 WEB",
+                product="Pointless Wars", company="SpacemenDevSquad", version="2.3",
+                button_color="red",
+                button_text_color="white",
+                bar_colors=["red", "blue"],
+                bar_track_color="#222") }}
+    </div>
+
+  </div>
+
+  {{ project_carousel(projects) }}
+</div>
+{% endblock %}
