@@ -18,6 +18,10 @@ def pointless_wars():
     projects = load_json("projects.json")["projects"]
     return render_template("pointless_wars.html", projects=projects)
 
+@projects_bp.route("/ChristmasCrash")
+def christmas_crash():
+    return render_template("christmas_crash.html")
+
 @projects_bp.route("/Raytracer")
 def raytracer():
     return render_template("raytracer.html")

@@ -1,0 +1,41 @@
+/*
+* Christmas Crash page
+* Layout, spacing and type sizes come from Bootstrap classes in the template.
+* Only the theme colors and the background scenery live here.
+*/
+
+@font-face {
+    font-family: Christmas;
+    src: url('../fonts/christmas.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.font-christmas {
+    font-family: Christmas, "Pixelify Sans", sans-serif;
+}
+
+/* Night sky instead of the site's usual black.
+   base.html's <body> has Bootstrap's .bg-black (which is !important), so match it here. */
+body.bg-black {
+    background-color: #2a2760 !important;
+}
+
+/* Snowy hill along the bottom of the screen, behind the page content (z-n1 in the template) */
+.cc-hills {
+    top: 60vh;
+    left: -10%;
+    width: 120%;
+}
+
+/* Snow falls behind the hill, like the original page */
+.snow-canvas {
+    z-index: 0;
+}
+
+/* The red description box from the original page */
+.cc-card {
+    --bs-card-bg: rgb(102, 27, 27);
+    --bs-card-color: #fff;
+}
