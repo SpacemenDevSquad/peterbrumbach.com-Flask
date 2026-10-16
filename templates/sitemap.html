@@ -21,8 +21,7 @@
   and https:// (via ProxyFix in wsgi.py).
 #}
 {% macro page(endpoint) -%}
-    {%- set url = url_for(endpoint, _external=True) -%}
-    <li><a class="yellowLink" href="{{ url }}">{{ url }}</a></li>
+    <li><a class="yellowLink" href="url_for('projects.drop_thee_ball')">{{host}}{{ url_for(endpoint) }}</a></li>
 {%- endmacro %}
 
 {% block content %}

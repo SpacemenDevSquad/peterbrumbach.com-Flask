@@ -11,7 +11,6 @@ services:
       - "${BIND_ADDRESS:-0.0.0.0}:${PORT:-8000}:8000"
 
     environment:
-      PROXY_HOPS: ${PROXY_HOPS:-2}
       WEB_CONCURRENCY: ${WEB_CONCURRENCY:-2}
       LOG_LEVEL: ${LOG_LEVEL:-info}
 
