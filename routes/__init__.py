@@ -11,3 +11,5 @@ def register_routes(app):
     app.register_blueprint(docs_bp)
     from .site_rules import site_rules_bp
     app.register_blueprint(site_rules_bp)
+    from .redirects import redirects_bp
+    app.register_blueprint(redirects_bp)
