@@ -22,8 +22,3 @@ def robots():
 @site_rules_bp.route("/.well-known/security.txt")
 def security():
     return send_text(public_dir() / ".well-known", "security.txt")
-
-
-@site_rules_bp.route("/security.txt")
-def security_legacy():
-    return redirect("/.well-known/security.txt", code=301)
